@@ -68,6 +68,7 @@ class App extends Component {
     storehash.methods.sendHash(this.state.ipfsHash).send(
         {
           from: accounts[0],
+          gas : 22000
         },
         (error, transactionHash) => {
           console.log(transactionHash);
