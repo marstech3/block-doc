@@ -65,10 +65,9 @@ class App extends Component {
     this.setState({ ipfsHash: ipfsHash[0].hash });
     // call Ethereum contract method "sendHash" and .send IPFS hash to etheruem contract
     //return the transaction hash from the ethereum contract
-    storehash.methods.sendHash(this.state.ipfsHash).send(
+    storehash.methods.setHash(this.state.ipfsHash).send(
         {
           from: accounts[0],
-          gas : 22000
         },
         (error, transactionHash) => {
           console.log(transactionHash);
