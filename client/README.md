@@ -4,8 +4,13 @@ truffle develop - > open new truffle console
 truffle compile -> compile the smart contract
 truffle deploy -> compile the smart contract
 truffle test - > Test the smart contract
+truffle migrate --network ropsten -> Deploy the smart contract on ropsten
 
 truffle migrate --network ropsten
+
+Steps to migrate contracts :
+1.truffle compile
+2.truffle migrate --network ropsten
 
 
 
