@@ -159,7 +159,7 @@ class SideNav extends React.Component {
                             // fixedStop={false}
                             // freez={false}
                             >
-                            <h1>BlocDoc</h1>
+                            <h1>BlockDoc</h1>
                         </ShakeSlow>
 
                     </HeaderDiv>
