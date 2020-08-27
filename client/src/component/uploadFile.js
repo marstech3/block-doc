@@ -1,12 +1,14 @@
 import React,{ Component } from "react";
 import "../App.css";
-import web3 from "../web3";
 import ipfs from "../ipfs";
-import storehash from "../storehash";
 import { Button } from "reactstrap";
 import {COLORS} from '../common/colorConstant'
 import {ContentWrapper} from '../common/contentWrapper'
 import { Card } from 'react-bootstrap';
+import ReadHash from './ReadHash';
+import SetHash from './SetHash';
+import web3 from 'web3';
+import storehash from "../storehash";
 
 class UploadFile extends Component {
   state = {
@@ -79,6 +81,7 @@ class UploadFile extends Component {
   };
 
   render() {
+    console.log("SHIT:",this.props);
     return (
       <ContentWrapper>
         <hr />
@@ -116,6 +119,16 @@ class UploadFile extends Component {
                 <td>Tx # </td>
                 <td> : </td>
                 <td>{this.state.transactionHash}</td>
+              </tr>
+              <tr>
+               {() => <ReadHash
+                  drizzle={this.props.drizzle}
+                  drizzleState={this.props.drizzleState}
+                />}
+              {() => <SetHash
+                drizzle={this.props.drizzle}
+                drizzleState={this.props.drizzleState}
+              />}
               </tr>
             </tbody>
           </table>
