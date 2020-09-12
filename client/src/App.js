@@ -43,6 +43,7 @@ class App extends Component {
   }
 
   render() {
+    // console.log("app.js: ", this.state.drizzleState, this.props.drizzle);
     return (
       <div className="App">
         {/* <header className="App-header">

@@ -23,7 +23,7 @@ class ReadHash extends React.Component {
 
     // using the saved `dataKey`, get the variable we're interested in
     const ipfsHash = ipfsHashContract.ipfsHash[this.state.dataKey];
-
+    console.log("Read hash!", ipfsHashContract, ipfsHash);
     // if it exists, then we display its value
     return <p>My stored string: {ipfsHash && ipfsHash.value}</p>;
   }
