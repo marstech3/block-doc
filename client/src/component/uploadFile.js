@@ -24,13 +24,6 @@ class UploadFile extends Component {
     stackId: null,
   };
 
-  componentDidMount() {
-    this.setState({
-      drizzleState: this.props.drizzleState,
-      drizzle: this.props.drizzle,
-    });
-  }
-
   //Take file input from user
   captureFile = (event) => {
     event.stopPropagation();
@@ -54,8 +47,12 @@ class UploadFile extends Component {
   getTxStatus = () => {
     console.log("Get transaction status");
     // get the transaction states from the drizzle state
-    const { transactions, transactionStack } = this.state.drizzleState;
-    console.log("transactions, transactionStack", transactions, transactionStack);
+    const { transactions, transactionStack } = this.props.drizzleState;
+    console.log(
+      "transactions, transactionStack",
+      transactions,
+      transactionStack
+    );
     // get the transaction hash using our saved `stackId`
     const txHash = transactionStack[this.state.stackId];
     console.log("txHash", txHash);
@@ -70,10 +67,10 @@ class UploadFile extends Component {
       });
     }
 
-    const contract = this.state.drizzle.contracts.ipfsHashContract;
+    const contract = this.props.drizzle.contracts.ipfsHashContract;
     console.log("contract", contract);
     // let drizzle know we want to watch the `myString` method
-    const dataKey = contract.methods["ipfsHash"].cacheCall();
+    // const dataKey = contract.methods["ipfsHash"].cacheCall();
 
     // get the contract state from drizzleState
     const { ipfsHashContract } = this.props.drizzleState.contracts;
@@ -87,11 +84,11 @@ class UploadFile extends Component {
 
   onSubmit = () => {
     console.log("On submit buffer: ", this.state.buffer);
-    this.getTxStatus();
-    const { drizzle, drizzleState } = this.state;
+
+    const { drizzle, drizzleState } = this.props;
     const contract = drizzle.contracts.ipfsHashContract;
     // let drizzle know we want to call the `set` method with `value`
-    const stackId = contract.methods["setHash"].cacheSend(this.state.buffer, {
+    const stackId = contract.methods["setHash"].cacheSend("test", {
       from: drizzleState.accounts[0],
     });
     // save the `stackId` for later reference
@@ -142,20 +139,18 @@ class UploadFile extends Component {
                 <td> : </td>
                 <td>{this.state.txStatus}</td>
               </tr>
-              {/* {this.state.drizzle !== null && (
-                <tr>
-                  {() => (
-                    <ReadHash
-                      drizzle={this.state.drizzle}
-                      drizzleState={this.state.drizzleState}
-                    />
-                  )}
-                  <SetHash
+              <tr>
+                {/* {() => (
+                  <ReadHash
                     drizzle={this.state.drizzle}
                     drizzleState={this.state.drizzleState}
                   />
-                </tr>
-              )} */}
+                )}
+                <SetHash
+                  drizzle={this.props.drizzle}
+                  drizzleState={this.props.drizzleState}
+                /> */}
+              </tr>
             </tbody>
           </table>
         </grid>
