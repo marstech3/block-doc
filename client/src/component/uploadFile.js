@@ -22,6 +22,7 @@ class UploadFile extends Component {
     txStatus: null,
     dataKey: null,
     stackId: null,
+    test: null,
   };
 
   //Take file input from user
@@ -54,6 +55,7 @@ class UploadFile extends Component {
       transactionStack
     );
     // get the transaction hash using our saved `stackId`
+    console.log("Stack id: ", this.state.stackId);
     const txHash = transactionStack[this.state.stackId];
     console.log("txHash", txHash);
     // if transaction hash does not exist, don't display anything
@@ -66,11 +68,13 @@ class UploadFile extends Component {
         transactionHash: txHash,
       });
     }
+  };
 
+  readHash = () => {
     const contract = this.props.drizzle.contracts.ipfsHashContract;
     console.log("contract", contract);
     // let drizzle know we want to watch the `myString` method
-    // const dataKey = contract.methods["ipfsHash"].cacheCall();
+    const dataKey = contract.methods["ipfsHash"].cacheCall();
 
     // get the contract state from drizzleState
     const { ipfsHashContract } = this.props.drizzleState.contracts;
@@ -79,12 +83,12 @@ class UploadFile extends Component {
     const ipfsHash = ipfsHashContract.ipfsHash[dataKey];
 
     this.setState({ ipfsHash: ipfsHash });
-    console.log("Tx status: ", ipfsHash, txHash);
+    console.log("Tx status: ", ipfsHash);
   };
 
-  onSubmit = () => {
+  onSubmit() {
     console.log("On submit buffer: ", this.state.buffer);
-
+    this.setState({ test: "test" });
     const { drizzle, drizzleState } = this.props;
     const contract = drizzle.contracts.ipfsHashContract;
     // let drizzle know we want to call the `set` method with `value`
@@ -93,8 +97,8 @@ class UploadFile extends Component {
     });
     // save the `stackId` for later reference
     this.setState({ stackId });
-    console.log("stackId: ", stackId);
-  };
+    console.log("Stack Id", stackId, this.state.stackId);
+  }
 
   render() {
     // console.log("SHIT:", this.props);
