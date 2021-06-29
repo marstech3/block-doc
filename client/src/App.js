@@ -1,12 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Sidebar from "./common/sideBar";
 // import Footer from './common/footer'
 // import NavigationBar from './common/navigationBar';
@@ -18,7 +13,6 @@ import { MyFile } from "./component/myFile";
 import { SharedFile } from "./component/sharedFile";
 import UploadFile from "./component/uploadFile";
 import { Setting } from "./component/setting";
-import { COLORS } from "./common/colorConstant";
 
 class App extends Component {
   state = { loading: true, drizzleState: null };
@@ -43,6 +37,7 @@ class App extends Component {
   }
 
   render() {
+    // console.log("app.js: ", this.state.drizzleState, this.props.drizzle);
     return (
       <div className="App">
         {/* <header className="App-header">

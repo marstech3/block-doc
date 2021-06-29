@@ -3,22 +3,20 @@ import React from "react";
 class SetString extends React.Component {
   state = { stackId: null };
 
-  handleKeyDown = e => {
+  handleKeyDown = (e) => {
     // if the enter key is pressed, set the value with the string
     if (e.keyCode === 13) {
       this.setValue(e.target.value);
     }
   };
 
-  setValue = value => {
+  setValue = (value) => {
     const { drizzle, drizzleState } = this.props;
     const contract = drizzle.contracts.ipfsHashContract;
-
     // let drizzle know we want to call the `set` method with `value`
     const stackId = contract.methods["setHash"].cacheSend(value, {
-      from: drizzleState.accounts[0]
+      from: drizzleState.accounts[0],
     });
-
     // save the `stackId` for later reference
     this.setState({ stackId });
   };
@@ -34,10 +32,13 @@ class SetString extends React.Component {
     if (!txHash) return null;
 
     // otherwise, return the transaction status
-    return `Transaction status: ${transactions[txHash] && transactions[txHash].status}`;
+    return `Transaction status: ${
+      transactions[txHash] && transactions[txHash].status
+    }`;
   };
 
   render() {
+    console.log("setHash: ", this.props, this.state);
     return (
       <div>
         <input type="text" onKeyDown={this.handleKeyDown} />
